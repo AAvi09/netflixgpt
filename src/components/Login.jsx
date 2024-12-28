@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
+import SignUpForm from "./SignUpForm";
+import { Link } from "react-router-dom";
 // import Browser from "./Browser";
 
 const Login = () => {
+  const [signUpForm, setSignUpForm] = useState(true);
+
+  const toggleSignInForm = () => {
+    setSignUpForm(!signUpForm);
+  };
   return (
     <div>
       <Header />
@@ -42,9 +49,12 @@ const Login = () => {
         </div>
         <div className="flex relative left-7 p-2 m-2">
           <h1 className="text-zinc-400">New to Netflix?</h1>
-          <h1 className="text-white font-semibold hover:underline cursor-pointer">
+          <Link
+            to="/in"
+            className="text-white font-semibold hover:underline cursor-pointer"
+          >
             Sign Up now
-          </h1>
+          </Link>
         </div>
         <h4 className="relative left-7 p-2 m-2 text-zinc-400 font-thin">
           This page is protected by Google reCAPTCHA to ensure you're not a bot.{" "}
