@@ -4,9 +4,10 @@ import Header from "./Header";
 const SignUpForm = () => {
   return (
     <div>
+      <div className="absolute w-full h-full  bg-gradient-to-r from-black to-gray-900 z-10 opacity-75"></div>
       <Header />
 
-      <div className="absolute top-[30%] left-[30%]">
+      <div className="absolute top-[30%] left-[30%] z-40">
         <h1 className="text-white text-center text-[50px] font-extrabold">
           Unlimited movies,
         </h1>

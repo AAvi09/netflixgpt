@@ -1,19 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import Header from "./Header";
-import SignUpForm from "./SignUpForm";
+
 import { Link } from "react-router-dom";
 // import Browser from "./Browser";
 
 const Login = () => {
-  const [signUpForm, setSignUpForm] = useState(true);
-
-  const toggleSignInForm = () => {
-    setSignUpForm(!signUpForm);
-  };
   return (
-    <div>
+    <div className="absolute w-full h-full  bg-gradient-to-r from-black to-gray-900 z-10 ">
       <Header />
-      <form className="absolute  top-2 left-[35%] w-96 object-scale-down bg-black bg-[rgba(0,0,0,0.85)]">
+      <form className="absolute  top-2 left-[35%] w-96 object-scale-down bg-black bg-[rgba(0,0,0,0.85)] ">
         <header>
           <h1 className="text-white font-bold text-3xl relative left-5 p-5 m-2">
             Sign In
