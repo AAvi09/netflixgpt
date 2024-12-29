@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="absolute w-full h-full  bg-gradient-to-r from-black to-gray-900 z-10 ">
+    <div>
       <Header />
-      <form className="absolute  top-2 left-[35%] w-96 object-scale-down bg-black bg-[rgba(0,0,0,0.85)] ">
+      <form className="absolute  top-2 left-[35%] w-96 object-scale-down scale-90 shadow-lg bg-[rgba(0,0,0,0.85)]  ">
         <header>
           <h1 className="text-white font-bold text-3xl relative left-5 p-5 m-2">
             Sign In

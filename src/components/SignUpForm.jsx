@@ -1,11 +1,17 @@
 import React from "react";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 const SignUpForm = () => {
   return (
     <div>
       <div className="absolute w-full h-full  bg-gradient-to-r from-black to-gray-900 z-10 opacity-75"></div>
       <Header />
+      <Link to="/">
+        <button className="absolute top-2 right-5 bg-red-600 w-20 h-10 text-white font-medium text-center justify-center cursor-pointer hover:bg-red-500 rounded-sm p-2 py-2 m-2 z-40">
+          Sign In
+        </button>
+      </Link>
 
       <div className="absolute top-[30%] left-[30%] z-40">
         <h1 className="text-white text-center text-[50px] font-extrabold">
