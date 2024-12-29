@@ -1,31 +1,57 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkValidEmail } from "../utils/validate";
 
 import { Link } from "react-router-dom";
 // import Browser from "./Browser";
 
 const Login = () => {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const handleSignIn = () => {
+    const message = checkValidEmail(
+      email.current.value,
+      password.current.value
+    );
+    setErrorMessage(message);
+    console.log(email.current.value);
+    console.log(password.current.value);
+  };
+  const email = useRef(null);
+  const password = useRef(null);
   return (
     <div>
       <Header />
-      <form className="absolute  top-2 left-[35%] w-96 object-scale-down scale-90 shadow-lg bg-[rgba(0,0,0,0.85)]  ">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        className="absolute  top-2 left-[35%] w-96 object-scale-down scale-90 shadow-lg bg-[rgba(0,0,0,0.85)]  "
+      >
         <header>
           <h1 className="text-white font-bold text-3xl relative left-5 p-5 m-2">
             Sign In
           </h1>
         </header>
         <input
+          ref={email}
           type="email"
           placeholder="Email or Contact Number"
-          className=" relative left-9 top-0 p-2 m-2 w-72 rounded-sm hover:cursor-text border-white bg-zinc-900 opacity-70"
+          className=" relative left-9 top-0 p-2 m-2 w-72 text-white rounded-sm hover:cursor-text border-white bg-zinc-900 opacity-70"
         />
         <input
-          type="text"
+          ref={password}
+          type="password"
           placeholder="Password"
-          className="relative left-9 p-2 m-2 w-72 rounded-sm border-white bg-zinc-900 opacity-70"
+          className="relative left-9 p-2 m-2 w-72 text-white rounded-sm border-white bg-zinc-900 opacity-70"
         />
+        <p className="text-red-800 font-medium relative left-11 z-10">
+          {errorMessage ? `⚔${errorMessage}` : "🚀"}
+        </p>
         <div className="relative bg-red-800   text-white text-sm w-72 h-10 left-9 justify-center text-center hover:cursor-pointer hover:bg-red-950 rounded-sm opacity-100 p-2 m-2">
-          <button type="submit"> Sign In</button>
+          <button type="submit" onClick={handleSignIn}>
+            {" "}
+            Sign In
+          </button>
         </div>
         <div className="relative text-gray-500 font-semibold p-2 m-2 left-40">
           <h1>OR</h1>
@@ -51,7 +77,7 @@ const Login = () => {
             Sign Up now
           </Link>
         </div>
-        <h4 className="relative left-7 p-2 m-2 text-zinc-400 font-thin">
+        <h4 className="relative left-0 p-2 m-2 text-zinc-400 font-thin scale-75">
           This page is protected by Google reCAPTCHA to ensure you're not a bot.{" "}
         </h4>
       </form>

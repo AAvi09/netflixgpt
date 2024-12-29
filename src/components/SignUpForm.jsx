@@ -12,6 +12,21 @@ const SignUpForm = () => {
           Sign In
         </button>
       </Link>
+      <div className="absolute top-2 right-32 w-24 z-40 rounded-sm bg-zinc-700 font-normal text-center justify-center cursor-pointer p-2 m-2">
+        <select>
+          <option
+            lang="en"
+            label="English"
+            value="en-IN"
+            className="bg-zinc-400"
+          >
+            English
+          </option>
+          <option lang="hi" label="हिन्दी" value="hi-IN">
+            हिन्दी
+          </option>
+        </select>
+      </div>
 
       <div className="absolute top-[30%] left-[30%] z-40">
         <h1 className="text-white text-center text-[50px] font-extrabold">
