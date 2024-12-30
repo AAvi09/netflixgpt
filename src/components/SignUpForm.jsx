@@ -46,9 +46,11 @@ const SignUpForm = () => {
           placeholder="Enter your email address "
           className="rounded-sm bg-black w-72 h-10 p-2 m-2 border-white text-white opacity-75 "
         />
-        <button className="bg-red-600 rounded-lg w-32 h-10 p-2 m-2 font-medium text-white cursor-pointer hover:bg-red-800">
-          Get Started {">"}
-        </button>
+        <Link to="/finalsignup">
+          <button className="bg-red-600 rounded-lg w-32 h-10 p-2 m-2 font-medium text-white cursor-pointer hover:bg-red-800">
+            Get Started {">"}
+          </button>
+        </Link>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import Login from "./Login";
 import Browser from "./Browser";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
+import FinalSignUpForm from "./FinalSignUpForm";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -17,6 +18,10 @@ const Body = () => {
     {
       path: "/in",
       element: <SignUpForm />,
+    },
+    {
+      path: "/finalsignup",
+      element: <FinalSignUpForm />,
     },
   ]);
   return (
