@@ -3,6 +3,8 @@ import Header from "./Header";
 import { checkValidEmail } from "../utils/validate";
 
 import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 // import Browser from "./Browser";
 
 const Login = () => {
@@ -15,6 +17,27 @@ const Login = () => {
     setErrorMessage(message);
     console.log(email.current.value);
     console.log(password.current.value);
+
+    if (message) return;
+
+    //sign in logic
+
+    signInWithEmailAndPassword(
+      auth,
+      email.current.value,
+      password.current.value
+    )
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setErrorMessage(errorCode + "-" + errorMessage);
+      });
   };
   const email = useRef(null);
   const password = useRef(null);
