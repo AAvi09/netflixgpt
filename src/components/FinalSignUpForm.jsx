@@ -1,7 +1,45 @@
 import React from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
+import { checkValidEmail } from "../utils/validate";
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const FinalSignUpForm = () => {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const email = useRef(null);
+  const password = useRef(null);
+  const handleSignUp = () => {
+    console.log(email.current.value);
+    console.log(password.current.value);
+    const message = checkValidEmail(
+      email.current.value,
+      password.current.value
+    );
+    setErrorMessage(message);
+    if (message) return;
+
+    //Sign Up logic
+    createUserWithEmailAndPassword(
+      auth,
+      email.current.value,
+      password.current.value
+    )
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        // ...
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        // ..
+        setErrorMessage(errorCode + "-" + errorMessage);
+      });
+  };
   return (
     <div className="bg-white w-screen h-screen relative">
       <div className="absolute w-screen h-24 shadow-lg bg-white">
@@ -10,6 +48,7 @@ const FinalSignUpForm = () => {
             Sign In
           </button>
         </Link>
+
         <div className="absolute top-2 left-32 z-10">
           <Link to="/">
             <img
@@ -20,7 +59,12 @@ const FinalSignUpForm = () => {
           </Link>
         </div>
       </div>
-      <div className="absolute w-64 shadow-lg h-auto bg-white top-[30%] left-[40%]">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+        className="absolute w-64 shadow-2xl h-auto bg-white top-[20%] left-[40%]"
+      >
         <div className="  w-56 p-2 m-2">
           <img
             src="	https://assets.nflxext.com/ffe/siteui/acquisition/simplicity/Devices.png"
@@ -31,19 +75,33 @@ const FinalSignUpForm = () => {
           Finish setting up your account
         </h1>
         <input
+          ref={email}
+          type="text"
+          placeholder="Full Name"
+          className="border-zinc-700 text-black bg-white relative w-56 p-2 m-2 justify-center"
+        />
+        <input
+          ref={email}
           type="text"
           placeholder="Email address"
           className="border-zinc-700 text-black bg-white relative w-56 p-2 m-2 justify-center"
         />
         <input
-          type="text"
+          ref={password}
+          type="password"
           placeholder="password"
           className="border-zinc-700 text-black bg-white relative w-56 p-2 m-2 justify-center"
         />
-        <button className="bg-red-800 w-56 rounded-sm text-white text-center justify-center p-2 m-2  relative ">
+        <p className="relative text-red-900 font-medium left-2 ">
+          {errorMessage}
+        </p>
+        <button
+          onClick={handleSignUp}
+          className="bg-red-800 w-56 rounded-sm text-white text-center justify-center p-2 m-2  relative "
+        >
           Sign Up
         </button>
-      </div>
+      </form>
     </div>
   );
 };
