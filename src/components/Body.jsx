@@ -28,6 +28,9 @@ const Body = () => {
       path: "/finalsignup",
       element: <FinalSignUpForm />,
     },
+    {
+      errorElement: <Error />,
+    },
   ]);
 
   useEffect(() => {
