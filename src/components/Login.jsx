@@ -2,12 +2,13 @@ import React, { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidEmail } from "../utils/validate";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 // import Browser from "./Browser";
 
 const Login = () => {
+  const navigate = useNavigate()
   const [errorMessage, setErrorMessage] = useState(null);
   const handleSignIn = () => {
     const message = checkValidEmail(
@@ -31,6 +32,7 @@ const Login = () => {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        navigate("/browser");
         // ...
       })
       .catch((error) => {

@@ -7,7 +7,7 @@ const Browser = () => {
     <div className="relative w-60">
       <img src={wick} />
       {/* <img src={wickCloseup} className="absolute"/> */}
-      <div className="absolute w-44 top-0">
+      <div className="absolute w-44 top-[20%] left-[40%]">
         <img src={wickCloseup} />
       </div>
     </div>

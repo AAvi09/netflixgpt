@@ -1,12 +1,13 @@
 import React from "react";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { checkValidEmail } from "../utils/validate";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 const FinalSignUpForm = () => {
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -31,6 +32,7 @@ const FinalSignUpForm = () => {
         const user = userCredential.user;
         // ...
         console.log(user);
+        navigate("/browser");
       })
       .catch((error) => {
         const errorCode = error.code;
