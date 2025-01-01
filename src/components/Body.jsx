@@ -38,9 +38,14 @@ const Body = () => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
-        const { uid, emailId, displayName } = user;
+        const { uid, emailId, displayName, photoURL } = user;
         dispatch(
-          addUser({ uid: uid, emailId: emailId, displayName: displayName })
+          addUser({
+            uid: uid,
+            emailId: emailId,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
         );
 
         // ...

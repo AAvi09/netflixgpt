@@ -2,9 +2,11 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useSelector } from "react-redux";
 
 const Browser = () => {
   const navigate = useNavigate();
+  const user = useSelector((store) => store.user);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -24,6 +26,17 @@ const Browser = () => {
   return (
     <div className="bg-white w-screen h-screen relative">
       <div className="absolute w-screen h-24 shadow-lg bg-zinc-800">
+        {user && user.photoURL ? (
+          <img
+            alt="usericon"
+            className="w-12 h-12 absolute top-2 right-32 z-10"
+            src={user.photoURL}
+          />
+        ) : (
+          <div className="w-12 h-12 absolute top-2 right-32 z-10 bg-gray-300 rounded-full flex items-center justify-center">
+            <span className="text-sm text-gray-600">No Photo</span>
+          </div>
+        )}
         <button
           onClick={handleSignOut}
           className="absolute top-2 right-5 bg-red-600 w-20 h-10 text-white font-medium text-center justify-center cursor-pointer hover:bg-red-500 rounded-sm p-2 py-2 m-2 z-40"

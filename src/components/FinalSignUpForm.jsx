@@ -4,11 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { checkValidEmail } from "../utils/validate";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/createSlice";
 
 const FinalSignUpForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState(null);
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
   const handleSignUp = () => {
@@ -31,8 +36,30 @@ const FinalSignUpForm = () => {
         // Signed up
         const user = userCredential.user;
         // ...
+        updateProfile(user, {
+          displayName: name.current.value,
+          photoURL: "https://avatars.githubusercontent.com/u/145574821?v=4",
+        })
+          .then(() => {
+            // Profile updated!
+            // ...
+            const { uid, emailId, displayName, photoURL } = auth.currentUser;
+            dispatch(
+              addUser({
+                uid: uid,
+                emailId: emailId,
+                displayName: displayName,
+                photoURL: photoURL,
+              })
+            );
+            navigate("/browser");
+          })
+          .catch((error) => {
+            // An error occurred
+            // ...
+            setErrorMessage(error.message);
+          });
         console.log(user);
-        navigate("/browser");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -77,7 +104,7 @@ const FinalSignUpForm = () => {
           Finish setting up your account
         </h1>
         <input
-          ref={email}
+          ref={name}
           type="text"
           placeholder="Full Name"
           className="border-zinc-700 text-black bg-white relative w-56 p-2 m-2 justify-center"
