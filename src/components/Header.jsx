@@ -11,7 +11,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
@@ -24,6 +24,9 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
+        // Redirect to browser page only if the user is already logged in
+        // Redirect to browser page only if the user is already logged in
+
         navigate("/browser");
 
         // ...
@@ -31,9 +34,25 @@ const Header = () => {
         // User is signed out
         // ...
         dispatch(removeUser());
-        navigate("/");
+        // Get the current pathname
+        const currentPath = window.location.pathname;
+
+        // Allow access to specific pages for logged-out users
+        if (currentPath === "/in" || currentPath === "/finalsignup") {
+          // Stay on the allowed paths
+          return;
+        } else {
+          navigate("/"); // Redirect to login page if not logged in
+        }
       }
     });
+    return () => {
+      unsubscribe();
+      console.log(
+        "%cheader ho gaya unmount",
+        "color: blue; font-size: 16px; background-color: red; padding: 4px; border-radius: 4px;"
+      );
+    };
   }, []);
   return (
     <div className="relative w-full h-screen overflow-hidden  ">

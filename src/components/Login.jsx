@@ -5,10 +5,13 @@ import { checkValidEmail } from "../utils/validate";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import Footer from "./Footer";
+
 // import Browser from "./Browser";
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
+  const [showHeader, setShowHeader] = useState(true); // State to control Header rendering
   const handleSignIn = () => {
     const message = checkValidEmail(
       email.current.value,
@@ -54,7 +57,7 @@ const Login = () => {
               "
         alt="Netflix Background"
       />
-      <Header />
+      {showHeader && <Header />}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -107,6 +110,9 @@ const Login = () => {
           <Link
             to="/in"
             className="text-white font-semibold hover:underline cursor-pointer"
+            onClick={() => {
+              setShowHeader(false);
+            }}
           >
             Sign Up now
           </Link>
@@ -115,6 +121,9 @@ const Login = () => {
           This page is protected by Google reCAPTCHA to ensure you're not a bot.{" "}
         </h4>
       </form>
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 };

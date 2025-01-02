@@ -1,8 +1,10 @@
 import React from "react";
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="absolute w-full h-full  bg-gradient-to-r from-black to-gray-900 z-10 opacity-75"></div>
@@ -56,11 +58,19 @@ const SignUpForm = () => {
           placeholder="Enter your email address "
           className="rounded-sm bg-black w-72 h-10 p-2 m-2 border-white text-white opacity-75 "
         />
-        <Link to="/finalsignup">
+        <Link
+          to="/finalsignup"
+          onClick={() => {
+            navigate("/finalsignup");
+          }}
+        >
           <button className="bg-red-600 rounded-lg w-32 h-10 p-2 m-2 font-medium text-white cursor-pointer hover:bg-red-800">
             Get Started {">"}
           </button>
         </Link>
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

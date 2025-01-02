@@ -9,6 +9,7 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/createSlice";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const FinalSignUpForm = () => {
   const dispatch = useDispatch();

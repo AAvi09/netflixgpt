@@ -4,6 +4,7 @@ import Browser from "./Browser";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 import FinalSignUpForm from "./FinalSignUpForm";
+import Error from "./Error";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
