@@ -1,23 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useSelector } from "react-redux";
 import Header from "./Header";
-import { API_OPTIONS } from "../utils/constants";
+import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
+import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
 
 const Browser = () => {
-  const getNowPlayingMovies = async () => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-      API_OPTIONS
-    );
-    const json = await data.json();
-    console.log(json);
-  };
-  useEffect(() => {
-    getNowPlayingMovies();
-  }, []);
+  //fetch data from TMDB API and update store
+  useNowPlayingMovies();
 
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
@@ -38,8 +31,8 @@ const Browser = () => {
   };
 
   return (
-    <div className="bg-white w-screen h-screen relative">
-      <div className="absolute w-screen h-24 shadow-lg bg-zinc-800">
+    <div className="bg-black w-screen  relative">
+      <div className="absolute w-screen h-20 shadow-lg bg-gradient-to-l from-zinc-800">
         {user && user.photoURL ? (
           <img
             alt="usericon"
@@ -57,9 +50,10 @@ const Browser = () => {
         >
           Sign Out
         </button>
-
-        <Header />
       </div>
+      <Header />
+      <MainContainer />
+      <SecondaryContainer />
     </div>
   );
 };

@@ -7,7 +7,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utils/createSlice";
+import { addUser } from "../utils/userSlice";
 import Header from "./Header";
 import Footer from "./Footer";
 

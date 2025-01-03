@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Navigate } from "react-router-dom";
-import { addUser, removeUser } from "../utils/createSlice";
+import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
