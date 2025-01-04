@@ -1,6 +1,4 @@
-import React from "react";
 import MovieCard from "./MovieCard";
-import { IMG_CDN_URL } from "../utils/constants";
 
 const MovieList = ({ title, movies }) => {
   if (!movies || movies.length === 0) {
@@ -9,10 +7,16 @@ const MovieList = ({ title, movies }) => {
   console.log(movies);
   return (
     <div>
-      <div className="space-y-6">
-        <h1 className="text-3xl font-bold text-gray-200 mb-4">{title}</h1>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <MovieCard posterPath={movies[0]?.poster_path} />
+      <div>
+        <h1 className="text-3xl font-bold text-gray-200 mb-4 p-2 m-2">
+          {title}
+        </h1>
+        <div className="flex  overflow-x-auto space-x-0 scrollbar-hide">
+          {movies.map((movie) => (
+            <div className="flex-shrink-0 w-36" key={movie.id}>
+              <MovieCard posterPath={movie?.poster_path} />
+            </div>
+          ))}
         </div>
       </div>
     </div>

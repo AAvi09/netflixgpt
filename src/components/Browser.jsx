@@ -7,10 +7,16 @@ import Header from "./Header";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
+import useTopRatedMovies from "../hooks/useTopRatedMovies";
+import usePopularMovies from "../hooks/usePopularMovies";
+import useUpcomingMovies from "../hooks/useUpcomingMovies";
 
 const Browser = () => {
   //fetch data from TMDB API and update store
   useNowPlayingMovies();
+  useTopRatedMovies();
+  usePopularMovies();
+  useUpcomingMovies();
 
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
