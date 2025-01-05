@@ -10,6 +10,7 @@ import SecondaryContainer from "./SecondaryContainer";
 import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import usePopularMovies from "../hooks/usePopularMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
+import GptSearch from "./GptSearch";
 
 const Browser = () => {
   //fetch data from TMDB API and update store
@@ -18,6 +19,7 @@ const Browser = () => {
   usePopularMovies();
   useUpcomingMovies();
 
+  const showGptSearchView = useSelector((store) => store.gpt.showGptSearch);
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
   const handleSignOut = () => {
@@ -37,8 +39,8 @@ const Browser = () => {
   };
 
   return (
-    <div className="bg-black w-screen  relative">
-      <div className="absolute w-screen h-20 shadow-lg bg-gradient-to-l from-zinc-800">
+    <div className=" w-screen  bg-black relative">
+      <div className="absolute w-screen h-20 shadow-lg bg-gradient-to-l from-zinc-800 to-black">
         {user && user.photoURL ? (
           <img
             alt="usericon"
@@ -58,8 +60,14 @@ const Browser = () => {
         </button>
       </div>
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+      {showGptSearchView ? (
+        <GptSearch />
+      ) : (
+        <>
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
     </div>
   );
 };

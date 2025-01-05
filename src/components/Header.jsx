@@ -6,6 +6,7 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -54,6 +55,10 @@ const Header = () => {
       );
     };
   }, []);
+
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  };
   return (
     <div className="relative w-full h-screen overflow-hidden  ">
       {/* Netflix Logo */}
@@ -65,6 +70,14 @@ const Header = () => {
             alt="Netflix Logo"
           />
         </Link>
+      </div>
+      <div className="absolute top-2 right-48 z-10">
+        <button
+          onClick={handleGptSearchClick}
+          className="bg-gradient-to-r from-purple-800 to bg-zinc-950 hover:scale-110 hover:bg-purple-600 transition-transform ease-in-out p-2 m-2 text-white rounded-md"
+        >
+          GPT Search
+        </button>
       </div>
     </div>
   );
