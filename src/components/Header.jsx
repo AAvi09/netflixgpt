@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toggleGptSearchView } from "../utils/gptSlice";
+import { LANG_PREFERENCE } from "../utils/constants";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -70,6 +71,15 @@ const Header = () => {
             alt="Netflix Logo"
           />
         </Link>
+      </div>
+      <div className="absolute top-2 right-80 w-24 z-40 rounded-sm bg-black font-normal text-center justify-center cursor-pointer p-2 m-2">
+        <select className="bg-black text-white">
+          {LANG_PREFERENCE.map((lang) => (
+            <option key={lang.lang} value={lang.value}>
+              {lang.label}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="absolute top-2 right-48 z-10">
         <button
