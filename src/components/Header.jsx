@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toggleGptSearchView } from "../utils/gptSlice";
 import { LANG_PREFERENCE } from "../utils/constants";
+import { changeLanguage } from "../utils/configSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -60,6 +61,10 @@ const Header = () => {
   const handleGptSearchClick = () => {
     dispatch(toggleGptSearchView());
   };
+
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  };
   return (
     <div className="relative w-full h-screen overflow-hidden  ">
       {/* Netflix Logo */}
@@ -73,7 +78,7 @@ const Header = () => {
         </Link>
       </div>
       <div className="absolute top-2 right-80 w-24 z-40 rounded-sm bg-black font-normal text-center justify-center cursor-pointer p-2 m-2">
-        <select className="bg-black text-white">
+        <select className="bg-black text-white" onChange={handleLanguageChange}>
           {LANG_PREFERENCE.map((lang) => (
             <option key={lang.lang} value={lang.value}>
               {lang.label}

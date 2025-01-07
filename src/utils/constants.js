@@ -10,8 +10,8 @@ export const API_OPTIONS = {
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
 
 export const LANG_PREFERENCE = [
-  { lang: "en", label: "English", value: "en-IN" },
-  { lang: "hi", label: "Hindi", value: "hi-IN" },
-  { lang: "fr", label: "French", value: "fr-FR" },
-  { lang: "es", label: "Spanish", value: "es-ES" },
+  { lang: "en", label: "English", value: "en" },
+  { lang: "hi", label: "Hindi", value: "hi" },
+  { lang: "fr", label: "French", value: "fr" },
+  { lang: "es", label: "Spanish", value: "es" },
 ];
