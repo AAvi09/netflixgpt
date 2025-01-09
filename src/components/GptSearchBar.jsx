@@ -1,15 +1,17 @@
 import React, { useRef } from "react";
 import MovieList from "./MovieList";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import lang from "../utils/languageConstants";
 // import generateResponse from "../utils/geminiConfig"; // Assuming you have the function for API call
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { API_OPTIONS } from "../utils/constants";
+import { addGptMovieResults } from "../utils/gptSlice";
 
 const GptSearchBar = () => {
   const movies = useSelector((store) => store.movies);
   const langKey = useSelector((store) => store.searchLang.language);
   const searchText = useRef(null);
+  const dispatch = useDispatch();
 
   const searchMovies = async (movie) => {
     const data = await fetch(
@@ -19,7 +21,7 @@ const GptSearchBar = () => {
       API_OPTIONS
     );
     const json = await data.json();
-    console.log(json.results);
+    return json.results;
   };
 
   const handleSearchClick = async () => {
@@ -40,8 +42,9 @@ const GptSearchBar = () => {
     const geminiMovies = result.response.text().split(", ");
     console.log(geminiMovies[0]);
     const promiseArray = geminiMovies.map((movie) => searchMovies(movie));
-    const tmdbMovies = Promise.all(promiseArray);
+    const tmdbMovies = await Promise.all(promiseArray);
     console.log(tmdbMovies);
+    dispatch(addGptMovieResults(tmdbMovies));
   };
 
   return (
