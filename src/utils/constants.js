@@ -15,3 +15,6 @@ export const LANG_PREFERENCE = [
   { lang: "fr", label: "French", value: "fr" },
   { lang: "es", label: "Spanish", value: "es" },
 ];
+
+export const OPENAI_KEY =
+  "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";

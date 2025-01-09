@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { addUser, removeUser } from "../utils/userSlice";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toggleGptSearchView } from "../utils/gptSlice";
@@ -65,6 +65,7 @@ const Header = () => {
   const handleLanguageChange = (e) => {
     dispatch(changeLanguage(e.target.value));
   };
+  const showGPTSEARCH = useSelector((store) => store.gpt.showGptSearch);
   return (
     <div className="relative w-full h-screen overflow-hidden  ">
       {/* Netflix Logo */}
@@ -78,20 +79,25 @@ const Header = () => {
         </Link>
       </div>
       <div className="absolute top-2 right-80 w-24 z-40 rounded-sm bg-black font-normal text-center justify-center cursor-pointer p-2 m-2">
-        <select className="bg-black text-white" onChange={handleLanguageChange}>
-          {LANG_PREFERENCE.map((lang) => (
-            <option key={lang.lang} value={lang.value}>
-              {lang.label}
-            </option>
-          ))}
-        </select>
+        {showGPTSEARCH && (
+          <select
+            className="bg-black text-white"
+            onChange={handleLanguageChange}
+          >
+            {LANG_PREFERENCE.map((lang) => (
+              <option key={lang.lang} value={lang.value}>
+                {lang.label}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
       <div className="absolute top-2 right-48 z-10">
         <button
           onClick={handleGptSearchClick}
           className="bg-gradient-to-r from-purple-800 to bg-zinc-950 hover:scale-110 hover:bg-purple-600 transition-transform ease-in-out p-2 m-2 text-white rounded-md"
         >
-          GPT Search
+          {showGPTSEARCH ? "HomePage" : "GPT Search"}
         </button>
       </div>
     </div>
