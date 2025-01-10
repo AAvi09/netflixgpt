@@ -44,7 +44,9 @@ const GptSearchBar = () => {
     const promiseArray = geminiMovies.map((movie) => searchMovies(movie));
     const tmdbMovies = await Promise.all(promiseArray);
     console.log(tmdbMovies);
-    dispatch(addGptMovieResults(tmdbMovies));
+    dispatch(
+      addGptMovieResults({ movieNames: geminiMovies, movieResults: tmdbMovies })
+    );
   };
 
   return (

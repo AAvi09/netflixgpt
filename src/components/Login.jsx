@@ -48,7 +48,7 @@ const Login = () => {
   return (
     <div>
       <img
-        className="absolute top-0 left-0 w-full h-full object-cover  z-0"
+        className="absolute top-0 left-0 w-full h-full object-cover sm:w-screen   z-0"
         src="https://assets.nflxext.com/ffe/siteui/vlv3/aa9edac4-a0e6-4f12-896e-32c518daec62/web/IN-en-20241223-TRIFECTA-perspective_1502c512-be5f-4f14-b21a-e3d75fe159ab_small.jpg"
         srcSet="
                 https://assets.nflxext.com/ffe/siteui/vlv3/aa9edac4-a0e6-4f12-896e-32c518daec62/web/IN-en-20241223-TRIFECTA-perspective_1502c512-be5f-4f14-b21a-e3d75fe159ab_small.jpg 1000w,
@@ -62,7 +62,7 @@ const Login = () => {
         onSubmit={(e) => {
           e.preventDefault();
         }}
-        className="absolute  top-2 left-[35%] w-96 object-scale-down scale-90 shadow-lg bg-[rgba(0,0,0,0.85)]  "
+        className="absolute  top-2 left-[35%] w-96  object-scale-down scale-90 shadow-lg bg-[rgba(0,0,0,0.85)]   "
       >
         <header>
           <h1 className="text-white font-bold text-3xl relative left-5 p-5 m-2">
